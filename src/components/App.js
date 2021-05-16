@@ -8,13 +8,14 @@ const App = (props) => {
   const [getIndex,setIndex] = useState(0);
   const [getDisable,setDisable] = useState(false);
   const [getDisable2,setDisable2] = useState(true);
-  
+  const [getDisable3,setDisable3] = useState(true);
   useEffect(()=>{
       display();
   },[getIndex]);
 
   const nextSlide = (e)=>{
           setDisable2(false);
+          setDisable3(false);
           let index = getIndex;
           index++;
           if(getIndex>props.slides.length-3){
@@ -31,6 +32,7 @@ const App = (props) => {
     index--;
     if(getIndex===1){
       setDisable2(true);
+      setDisable3(true);
     }
     console.log(getIndex);
     setIndex(index);
@@ -45,6 +47,7 @@ const App = (props) => {
   const reStart = ()=>{
      setDisable2(true);
      setDisable(false);
+     setDisable3(true);
      setIndex(0);
   }
 
@@ -57,7 +60,7 @@ const App = (props) => {
         <p data-testid="text">{getText}</p>
         <button data-testid="button-prev" disabled={getDisable2} onClick={prevSlide}>Prev</button>
         <button data-testid="button-next" disabled={getDisable} onClick={nextSlide}>Next</button>
-        <button data-testid="button-restart" onClick={reStart}>Restart</button>
+        <button data-testid="button-restart" disabled={getDisable3} onClick={reStart}>Restart</button>
 
       </>
   )
